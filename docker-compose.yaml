@@ -1,0 +1,11 @@
+version: "6"
+services:
+  db_auth:
+   container_name: postgres
+   ports: 
+   - "5432:5432"
+   environment:
+   - POSTGRES_PASSWORD=nitocris
+   - POSTGRES_USER=postgres
+   image: postgres:14.16-alpine3.20
+
