@@ -52,7 +52,7 @@ db.sequelize.authenticate()
     try {
       const transaction = await db.sequelize.transaction();
       try {
-        const climate = await db.timezone.findAll();
+        const timezone = await db.timezone.findAll();
 
         res.json(timezone);
         await transaction.commit();
