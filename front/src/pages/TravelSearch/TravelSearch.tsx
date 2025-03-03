@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react';
 import Results from '../../components/Results';
 import Button from "react-bootstrap/Button";
 import Filter from '../../components/Filter';
-import { ClimateListProps } from './types';
-import { TimezoneListProps } from './types';
+import { ClimateListProps,TimezoneListProps,CityListProps } from './types';
 
 export const TravelSearch = () => {
 
     const [resultData, setResultData ] = useState<any>([]);
     const [climateList, setClimateList] = useState<ClimateListProps[]>([]);
     const [timezoneList, setTimezoneList] = useState<TimezoneListProps[]>([]);
+    const [cityList, setCityList] = useState<CityListProps[]>([]);
     const handleSearch = (dataFromServer: any) => {
         setResultData(dataFromServer);
     }
@@ -20,17 +20,37 @@ export const TravelSearch = () => {
           const res = await fetch('http://localhost:3000/getClimateList');
 
           if (!res?.ok) {
-            throw new Error('Errors http: getClimateList')
+            throw new Error("Ошибка http: getClimateList")
           }
 
           const data = await res.json();
           setClimateList(data)
         } catch {
-          console.log('Error')
+          console.log("Ошибка")
         }
       }
       getClimateList();
     }, [])
+
+
+    useEffect(() => {
+    const getCityList = async () => {
+      try {
+        const res = await fetch('http://localhost:3000/getCityList');
+
+        if (!res?.ok) {
+          throw new Error("Ошибка http: getCityList")
+        }
+
+        const data = await res.json();
+        setCityList(data)
+      } catch {
+        console.log('Error')
+      }
+    }
+    getCityList();
+    }, [])
+
 
     console.log('timezone:', timezoneList);
     useEffect(() => {
@@ -39,13 +59,13 @@ export const TravelSearch = () => {
           const res = await fetch('http://localhost:3000/getTimezoneList');
 
           if (!res?.ok) {
-            throw new Error('Errors http: getTimezoneList')
+            throw new Error("Ошибка http: getTimezoneList")
           }
 
           const data = await res.json();
           setTimezoneList(data)
         } catch {
-          console.log('Error')
+          console.log("Ошибка")
         }
       }
       getTimezoneList();
@@ -57,7 +77,12 @@ export const TravelSearch = () => {
           <h1>Найдите свое путешествие!</h1>
           <h2>Поиск идеи для отдыха</h2>
           <Filter handleSearch={handleSearch} climateList={climateList} timezoneList={timezoneList}/>
-          <Results resultData={resultData} climate={climateList} timezone={timezoneList} />
+          <Results 
+            resultData={resultData}
+            climate={climateList}
+            timezone={timezoneList}
+            cityList={cityList}
+          />
         </div>
     )
 };

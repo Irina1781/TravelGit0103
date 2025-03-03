@@ -1,6 +1,4 @@
-import { useMemo, useState } from "react";
 import styled from "styled-components";
-import { Behaviour, Dropdown } from "../components";
 import "../styles.css";
 
 console.clear();

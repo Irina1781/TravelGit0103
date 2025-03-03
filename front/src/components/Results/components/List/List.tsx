@@ -2,7 +2,7 @@ import React from "react";
 import { CardContainer, Listcontainer } from './List.styled';
 import { Button } from "react-bootstrap";
 
-const List = ({ results, climate, timezone}) => {
+const List = ({ results, climate, timezone, cityList}) => {
     if (!results?.length || !Array.isArray(results)) {
         return <p>Ничего не найдено.</p>;
     }
@@ -27,6 +27,18 @@ const List = ({ results, climate, timezone}) => {
         return '-'
     }
 
+    const getCityName = (citiesId) => {
+        if (cityList?.length && citiesId?.length) {
+            const names = citiesId.map(id => {
+                const findCity = cityList.find(item => item.id === id)?.city;
+                return findCity;
+            })
+           return  names.join(', ');
+        }
+        return '-'
+    }
+
+
     return (
         <Listcontainer>
             {results.map((result, index) => (
@@ -40,7 +52,7 @@ const List = ({ results, climate, timezone}) => {
                     </strong>
                     <br /><br />
                     <strong>
-                        Города вылета: {result.city.join(', ')}
+                        Города вылета: {getCityName(result?.city)}
                     </strong>
                     <br /><br />
                     {result.description}

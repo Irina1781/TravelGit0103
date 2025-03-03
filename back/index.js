@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const mysql = require("mysql");
 const cors = require("cors");
 const db = require('./models/index');
 const app = express();
@@ -14,18 +13,18 @@ app.use(express.json({ limit: '500kb' }));
 
 db.sequelize.sync({ alter: true }) 
   .then(() => {
-    console.log('Database synced');
+    console.log("База данных запущена");
   })
   .catch(err => {
-    console.error('Error syncing database:', err);
+    console.error("Ошибка запуска базы данных:", err);
   });
 
 db.sequelize.authenticate()
   .then(() => {
-    console.log('Connection has been established successfully.');
+    console.log("Соединение успешно установлено");
   })
   .catch(err => {
-    console.error('Unable to connect to the database:', err);
+    console.error("Невозможно сеодиниться с базой данных", err);
   });
  
   app.get("/getClimateList", async (req, res) => {
@@ -37,14 +36,14 @@ db.sequelize.authenticate()
         res.json(climate);
         await transaction.commit();
       } catch (error) {
-        console.error("Error fetching travel data:", error);
+        console.error("Ошибка в получении данных климата:", error);
         await transaction.rollback();
-        res.status(500).json({ error: 'Failed to fetch travel data' });
+        res.status(500).json({ error: "Не удалось получить данные климата" });
       }
   
     } catch (error) {
-      console.error("Error starting transaction:", error);
-      res.status(500).json({ error: 'Failed to start transaction' }); 
+      console.error("Ошибка в старте транзакции:", error);
+      res.status(500).json({ error: "Не удалось начать передачу данных"}); 
     }
   })
 
@@ -57,41 +56,75 @@ db.sequelize.authenticate()
         res.json(timezone);
         await transaction.commit();
       } catch (error) {
-        console.error("Error fetching timezone data:", error);
+        console.error("Ошибка в получении данных часового пояса:", error);
         await transaction.rollback();
-        res.status(500).json({ error: 'Failed to fetch timezone data' });
+        res.status(500).json({ error: "Не удалось получить данные часового пояса" });
       }
   
     } catch (error) {
-      console.error("Error starting transaction:", error);
-      res.status(500).json({ error: 'Failed to start transaction' }); 
+      console.error("Ошибка в старте транзакции:", error);
+      res.status(500).json({ error: "Не удалось начать передачу данных" }); 
     }
   })
+
+  app.get("/getCityList", async (req, res) => {
+    try {
+      const transaction = await db.sequelize.transaction();
+      try {
+        const city = await db.city.findAll();
+
+        res.json(city);
+        await transaction.commit();
+      } catch (error) {
+        console.error("Ошибка в получении данных городов вылета:", error);
+        await transaction.rollback();
+        res.status(500).json({ error: "Не удалось получить данные по городам вылета" });
+      }
+  
+    } catch (error) {
+      console.error("Ошибка в старте транзакции:", error);
+      res.status(500).json({ error: "Не удалось начать передачу данных" }); 
+    }
+  })
+
+
 app.get("/getResult", async (req, res) => {
   console.log(req.query?.types);
   try {
     const transaction = await db.sequelize.transaction();
 
     const types=req.query?.types || [];
-    try {
-      const travel = await db.travel.findAll({ transaction, logging: console.log, where: {
-        type: {
-          [Op.in]: types,
-        },
+    const city = req.query?.city || null;
+
+
+    const filter = {
+      type: {
+        [Op.in]: types,
       },
-    });
-      //console.log(travel);
+    };
+
+    console.log(city,'city');
+
+    if (city) {
+      filter.city = {
+       [Op.contains]: city,
+      };
+    }
+   
+    try {
+      const travel = await db.travel.findAll({ transaction, logging: console.log, where:  filter });
+      console.log(travel,'travel');
       res.json(travel);
       await transaction.commit();
     } catch (error) {
-      console.error("Error fetching travel data:", error);
+      console.error("Ошибка в получении данных travel:", error);
       await transaction.rollback();
-      res.status(500).json({ error: 'Failed to fetch travel data' });
+      res.status(500).json({ error: "Не удалось получить travel данные" });
     }
 
   } catch (error) {
-    console.error("Error starting transaction:", error);
-    res.status(500).json({ error: 'Failed to start transaction' }); 
+    console.error("Ошибка в старте транзакции:", error);
+    res.status(500).json({ error: "Не удалось начать передачу данных" }); 
   }
 });
 

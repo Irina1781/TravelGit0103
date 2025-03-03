@@ -43,14 +43,15 @@ module.exports = (sequelize) => {
            
         },
         city: {                  
-            type: DataTypes.ARRAY(DataTypes.TEXT), 
+            type: DataTypes.ARRAY(DataTypes.INTEGER), 
             allowNull: false, 
                     },
         more: {                  
             type: DataTypes.TEXT, 
             allowNull: false,           
         },
-    },{freezeTableName: true, timestamps: false,}
+    },
+    {freezeTableName: true, timestamps: false}
 );
 
     return travel;

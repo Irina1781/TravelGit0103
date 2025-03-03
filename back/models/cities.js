@@ -1,13 +1,13 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    return sequelize.define('climate', {
+    return sequelize.define('city', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             allowNull: true,
         },
-        climate: {
+        city: {
             type: DataTypes.TEXT, 
             allowNull: false,      
         },

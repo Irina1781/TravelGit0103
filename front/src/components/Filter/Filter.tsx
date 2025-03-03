@@ -6,8 +6,8 @@ import axios from "axios";
 import * as S from './Filter.styled';
 import Button from "react-bootstrap/Button";
 
-import { ClimateListProps } from '../../pages/TravelSearch/types';
-import { TimezoneListProps } from '../../pages/TravelSearch/types';
+import { ClimateListProps,TimezoneListProps } from '../../pages/TravelSearch/types';
+
 interface FilterInterface {
     handleSearch: (data: any) => void;
     climateList: ClimateListProps;
@@ -29,13 +29,12 @@ const Filter: FC<FilterInterface> = ({ handleSearch, climateList, timezoneList }
 
     console.log('request', request);
 
-
     const handleUpdate = async () => {
         try {
             const response = await axios.get("http://localhost:3000/getResult", {
                 params: {
                     types: type.map(item => item.id),
-                    city: city?.id,
+                    city: city?.id?[city.id]:null,
                 }
             })
             handleSearch(response.data)
