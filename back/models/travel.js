@@ -21,13 +21,15 @@ module.exports = (sequelize) => {
         },
         geo: {                  
             type: DataTypes.TEXT, 
-            allowNull: false, 
-            
+            allowNull: false,             
+        },
+        currency: {                  
+            type: DataTypes.TEXT, 
+            allowNull: true,             
         },
         type: {                  
             type: DataTypes.INTEGER, 
-            allowNull: false, 
-            
+            allowNull: false,             
         },
         climate: {                  
             type: DataTypes.INTEGER, 
@@ -39,8 +41,7 @@ module.exports = (sequelize) => {
         },
         cost: {                  
             type: DataTypes.INTEGER, 
-            allowNull: false, 
-           
+            allowNull: false,            
         },
         city: {                  
             type: DataTypes.ARRAY(DataTypes.INTEGER), 

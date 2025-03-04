@@ -1,17 +1,17 @@
 body {
-  background-color: #FFE1A5;
-  
+  background-color: #EEF6FE;  
 }
 
 .App {
+  box-sizing: border-box;
   font-family: sans-serif;
   text-align: center;
-  background-color: #FFE1A5;
+  background-color: #EEF6FE;
   padding-top: 5px;
 }
 
 .Button {
-  background-color: #DFAF2B;
+  background-color: #88B5CE;
   margin-top: 20px;
   border: 1px solid lightgrey;
   font: 15px;
@@ -22,7 +22,7 @@ body {
 }
 
 .Button1 {
-  background-color: #DFAF2B;
+  background-color: #88B5CE;
   margin-left: 10px;
   margin-top: 20px;
   border: 1px solid lightgrey;
@@ -33,19 +33,40 @@ body {
   text-align: center; 
 }
 
-.Dropdown {
- color: #DFAF2B;
+.ButtonList {
+  background-color: #88B5CE;
+  margin-top: 50px;
+  border: 1px solid lightgrey;
+  font: 70%;
+  color: #fff;
+  padding: 7px;
+  text-decoration: none;
+  text-align: center;   
+  border-radius: 1%;
 }
 
 .Img {
-  margin-right: 5px;
-  margin-bottom: 5px;  
+  width: 500px;
+  border-radius: 1%;
 }
 
 .Text {
   position: absolute;
-  margin-left: 500px;
-  margin-right:35px;
-  font-size: 11pt;
+  margin-left: 45%;
+  margin-right: 2%;
+  font-size: 80%;
   text-align: justify;
+  padding: 2%;
+}
+
+.headline {
+ font-family: "Lovers Quarrel", cursive; 
+ font-weight: 800;
+ font-style: normal;
+}
+
+.headline2 {
+  font-family: "Arizonia", cursive;
+  font-weight: 400;
+  font-style: normal;
 }

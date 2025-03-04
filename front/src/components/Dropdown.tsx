@@ -210,7 +210,7 @@ const Control = styled.button`
   padding: 0;
   margin: 0;
   border: none;
-  background-color: #DFAF2B;
+  background-color: #88B5CE;
 `;
 
 const Menu = styled.menu<{ coords: Coords }>`
@@ -220,10 +220,10 @@ const Menu = styled.menu<{ coords: Coords }>`
   min-width: ${(p) => `${Math.max(100, p.coords.width)}px`};
   margin: 1px 0 0;
   padding: 0;
-  border: 1px solid #DFAF2B;
+  border: 1px solid #88B5CE;
   max-height: 300px;
   overflow-y: auto;
-  background-color: #DFAF2B;
+  background-color: #88B5CE;
   border-radius: 3px;
 `;
 

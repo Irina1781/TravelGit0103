@@ -1,5 +1,5 @@
 import React from "react";
-import { CardContainer, Listcontainer } from './List.styled';
+import { CardContainer, Listcontainer, Image} from './List.styled';
 import { Button } from "react-bootstrap";
 
 const List = ({ results, climate, timezone, cityList}) => {
@@ -42,10 +42,10 @@ const List = ({ results, climate, timezone, cityList}) => {
     return (
         <Listcontainer>
             {results.map((result, index) => (
-                <CardContainer key={index}>
-                    <div className="Img">
-                    <img src={result?.photo} style={{width:490}}/>
-                    <br /></div>
+                <CardContainer key={index}>                    
+                    <div className ="Img">
+                    <img src={result?.photo} style={{width:'500px'}}/>
+                    </div>
                     <div className="Text">
                     <strong>
                         Название: {result.name}
@@ -70,10 +70,14 @@ const List = ({ results, climate, timezone, cityList}) => {
                     </strong>
                     <br /><br />
                     <strong>
-                       Минимальная стоимость перелёта (туда-обратно): {result.cost +' руб.'}
+                       Валюта: {result.currency}
                     </strong>
                     <br /><br />
-                    <a href={result?.more} className="Button" target="_blank"> Подробнее </a></div>
+                    <strong>
+                       Минимальная стоимость перелёта (туда-обратно): {result.cost +' руб.'}
+                    </strong>
+                    <br /><br /><br></br>
+                    <a href={result?.more} className="ButtonList" target="_blank"> Подробнее </a></div>
                 </CardContainer>
             ))}
         </Listcontainer>

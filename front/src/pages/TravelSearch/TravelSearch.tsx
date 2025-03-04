@@ -13,6 +13,7 @@ export const TravelSearch = () => {
     const handleSearch = (dataFromServer: any) => {
         setResultData(dataFromServer);
     }
+
     console.log('climate:', climateList);
     useEffect(() => {
       const getClimateList = async () => {
@@ -74,9 +75,13 @@ export const TravelSearch = () => {
     console.log('result', resultData);
     return (
         <div className="App">
-          <h1>Найдите свое путешествие!</h1>
-          <h2>Поиск идеи для отдыха</h2>
-          <Filter handleSearch={handleSearch} climateList={climateList} timezoneList={timezoneList}/>
+          <h1 className='headline'>Найдите свое путешествие!</h1>
+          <h2 className='headline2'>Поиск идеи для отдыха</h2>
+          <Filter 
+          handleSearch={handleSearch} 
+          climateList={climateList} 
+          timezoneList={timezoneList}/>
+
           <Results 
             resultData={resultData}
             climate={climateList}

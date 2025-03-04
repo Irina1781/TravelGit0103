@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import "./styles.css";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
+import Bootstrap from '../../node_modules/bootstrap'
 import { TravelSearch } from './pages';
 
 const handleSearch = (city, type) => {
