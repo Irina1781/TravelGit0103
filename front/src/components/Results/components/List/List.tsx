@@ -44,7 +44,7 @@ const List = ({ results, climate, timezone, cityList}) => {
             {results.map((result, index) => (
                 <CardContainer key={index}>                    
                     <div className ="Img">
-                    <img src={result?.photo} style={{width:'500px'}}/>
+                    <img src={result?.photo} style={{width:'94%'}}/>
                     </div>
                     <div className="Text">
                     <strong>

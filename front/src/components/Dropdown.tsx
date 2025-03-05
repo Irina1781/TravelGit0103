@@ -225,7 +225,7 @@ const Menu = styled.menu<{ coords: Coords }>`
   overflow-y: auto;
   background-color: #88B5CE;
   border-radius: 3px;
-`;
+ `;
 
 const Backdrop = styled.div`
   position: fixed;
